@@ -22,9 +22,16 @@ connection.once('open', () => {
 
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
+const contactsRouter = require('./routes/contacts');
+const worksRouter = require('./routes/works');
+const ordersRouter = require('./routes/orders');
+
 
 app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.use('/usuarios', usersRouter);
+app.use('/contactos', contactsRouter);
+app.use('/trabajos', worksRouter);
+app.use('/pedidos', ordersRouter);
 
 
 app.listen(port, () => {

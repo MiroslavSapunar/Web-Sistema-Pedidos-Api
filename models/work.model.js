@@ -2,30 +2,37 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minlength: 3
-    },
-    password: {
+const workSchema = new Schema({
+    linkDrive: {
         type: String,
         required: true,
         trim: true,
         minlength: 3
     },
-    type: {
+    faz: {
         type: String,
         required: true,
+        trim: true,
+        minlength: 3
     },
-    online: {
-        type: Boolean,
+    paginasCarilla: {
+        type: Number,
         required: true,
+    },
+    margen: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    },
+    terminacion: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
     },
 });
 
-const User = mongoose.model('User', userSchema);
+const Work = mongoose.model('Work', workSchema);
 
-module.exports = User;
+module.exports = Work;
