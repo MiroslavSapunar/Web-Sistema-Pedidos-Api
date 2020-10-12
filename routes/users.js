@@ -13,16 +13,25 @@ router.route('/add').post((req, res) => {
     const type = req.body.type;
     const online = req.body.online;
 
-    const newUser = new User({
+    var newUser = new User({
         username,
         password,
         type,
         online,
     });
 
-    newUser.save()
-        .then(() => res.json('¡Usuario agregado!'))
-        .catch( err => res.status(400).json('Error: ' + err));
+    newUser.save(function(err,obj) {
+        if(err){
+            res.json(err)
+        }
+        res.json(obj.id)
+     });
+
+    /**
+     * 
+     .then(() => res.json('¡Usuario agregado!'))
+     .catch( err => res.status(400).json('Error: ' + err));
+   */
 });
 
 module.exports = router;

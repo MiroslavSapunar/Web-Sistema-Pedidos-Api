@@ -10,6 +10,7 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const linkDrive = req.body.linkDrive;
     const faz = req.body.faz;
+    const paginasPDF = req.body.paginasPDF;
     const paginasCarilla = req.body.paginasCarilla;
     const margen = req.body.margen;
     const terminacion = req.body.terminacion;
@@ -17,14 +18,27 @@ router.route('/add').post((req, res) => {
     const newWork = new Work({
         linkDrive,
         faz,
+        paginasPDF,
         paginasCarilla,
         margen,
         terminacion,
     });
 
-    newWork.save()
-        .then(() => res.json('Work added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    newWork.save(function(err,obj) {
+        if(err){
+            res.json(err)
+        }
+        if(obj){
+            res.json(obj.id)
+        }
+     });
+
+    /**
+     * 
+     newWork.save()
+     .then(() => res.json('Work added!'))
+     .catch(err => res.status(400).json('Error: ' + err));
+    */
 });
 
 router.route('/:id').get((req, res) => {

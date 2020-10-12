@@ -27,6 +27,11 @@ const contactSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    timbre: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     dni: {
         type: String,
         required: true,

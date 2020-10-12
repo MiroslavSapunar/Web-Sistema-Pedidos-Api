@@ -9,12 +9,12 @@ const orderSchema = new Schema({
         trim: true,
         minlength: 3
     },
-    id_work: {
-        type: Array,
+    id_works: {
+        type: String,
         required: true,
     },
     total: {
-        type: Number,
+        type: String,
         required: true,
     },
     id_reception: {
@@ -28,6 +28,11 @@ const orderSchema = new Schema({
         required: true,
         trim: true,
         minlength: 3
+    },
+    numeroPedido: {
+        type: String,
+        required: true,
+        trim: true,
     },
     estado:{        
         type: String,

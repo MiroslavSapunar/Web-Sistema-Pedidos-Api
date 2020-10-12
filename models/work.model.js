@@ -15,8 +15,14 @@ const workSchema = new Schema({
         trim: true,
         minlength: 3
     },
+
+    paginasPDF: {
+        type: String,
+        required: true,
+    },
+
     paginasCarilla: {
-        type: Number,
+        type: String,
         required: true,
     },
     margen: {

@@ -13,6 +13,7 @@ router.route('/add').post((req, res) => {
     const total = req.body.total;
     const id_reception = req.body.id_reception;
     const id_worker = req.body.id_worker;
+    const numeroPedido = req.body.numeroPedido;
     const estado = req.body.estado;
 
     const newOrder = new Order({
@@ -21,12 +22,25 @@ router.route('/add').post((req, res) => {
         total,
         id_reception,
         id_worker,
+        numeroPedido,
         estado,
     });
 
-    newOrder.save()
-        .then(() => res.json('Order added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    newOrder.save(function(err,obj) {
+        if(err){
+            res.json(err)
+        }
+        if(obj){
+            res.json(obj.id)
+        }
+    });
+
+    /**
+     * 
+     newOrder.save()
+     .then(() => res.json('Order added!'))
+     .catch(err => res.status(400).json('Error: ' + err));
+    */
 });
 
 router.route('/:id').get((req, res) => {
