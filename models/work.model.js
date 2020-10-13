@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const workSchema = new Schema({
+    numeroTrabajo: {
+        type: String,
+        required: true
+    },
     linkDrive: {
         type: String,
         required: true,
@@ -37,6 +41,17 @@ const workSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    id_worker: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    estado: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+
 });
 
 const Work = mongoose.model('Work', workSchema);

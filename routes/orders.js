@@ -12,7 +12,6 @@ router.route('/add').post((req, res) => {
     const id_work = req.body.id_work;
     const total = req.body.total;
     const id_reception = req.body.id_reception;
-    const id_worker = req.body.id_worker;
     const numeroPedido = req.body.numeroPedido;
     const estado = req.body.estado;
 
@@ -21,7 +20,6 @@ router.route('/add').post((req, res) => {
         id_work,
         total,
         id_reception,
-        id_worker,
         numeroPedido,
         estado,
     });

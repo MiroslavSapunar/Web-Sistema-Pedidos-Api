@@ -23,12 +23,6 @@ const orderSchema = new Schema({
         trim: true,
         minlength: 3
     },
-    id_worker: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 3
-    },
     numeroPedido: {
         type: String,
         required: true,

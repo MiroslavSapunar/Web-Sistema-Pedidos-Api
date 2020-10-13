@@ -8,20 +8,26 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+    const numeroTrabajo = req.body.numeroTrabajo;
     const linkDrive = req.body.linkDrive;
     const faz = req.body.faz;
     const paginasPDF = req.body.paginasPDF;
     const paginasCarilla = req.body.paginasCarilla;
     const margen = req.body.margen;
     const terminacion = req.body.terminacion;
+    const id_worker= req.body.id_worker;
+    const estado= req.body.estado
 
     const newWork = new Work({
+        numeroTrabajo,
         linkDrive,
         faz,
         paginasPDF,
         paginasCarilla,
         margen,
         terminacion,
+        id_worker,
+        estado,
     });
 
     newWork.save(function(err,obj) {
@@ -47,13 +53,14 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
-/**
+
 router.route('/:id').delete((req, res) => {
-    Contact.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Contact deleted!'))
+    Work.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Work deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
- * 
+
+/** 
  router.route('/update/:id').post((req, res) => {
      Contact.findById(req.params.id)
      .then(contact => {
