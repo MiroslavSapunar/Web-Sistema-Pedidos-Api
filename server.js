@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLASDB_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true , useFindAndModify: false }
 );
 
 const connection = mongoose.connection;
@@ -25,6 +25,7 @@ const usersRouter = require('./routes/users');
 const contactsRouter = require('./routes/contacts');
 const worksRouter = require('./routes/works');
 const ordersRouter = require('./routes/orders');
+const countRouter = require('./routes/counts');
 
 
 app.use('/exercises', exercisesRouter);
@@ -32,6 +33,7 @@ app.use('/usuarios', usersRouter);
 app.use('/contactos', contactsRouter);
 app.use('/trabajos', worksRouter);
 app.use('/pedidos', ordersRouter);
+app.use('/contadores', countRouter);
 
 
 app.listen(port, () => {

@@ -38,6 +38,12 @@ const contactSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    id_pedido: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    },
 });
 
 const Contact = mongoose.model('Contact', contactSchema);

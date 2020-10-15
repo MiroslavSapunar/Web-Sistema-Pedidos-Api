@@ -33,12 +33,6 @@ router.route('/add').post((req, res) => {
         }
     });
 
-    /**
-     * 
-     newOrder.save()
-     .then(() => res.json('Order added!'))
-     .catch(err => res.status(400).json('Error: ' + err));
-    */
 });
 
 router.route('/:id').get((req, res) => {
@@ -47,28 +41,26 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
-/**
 router.route('/:id').delete((req, res) => {
-    Contact.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Contact deleted!'))
+    Order.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Order deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
- * 
- router.route('/update/:id').post((req, res) => {
-     Contact.findById(req.params.id)
-     .then(contact => {
-         contact.nombre = req.body.nombre;
-         contact.email = req.body.email;
-         contact.telefono = req.body.telefono;
-         contact.direccion = req.body.direccion;
-         contact.dni = req.body.dni;
-         
-         contact.save()
-         .then(() => res.json('Contact updated!'))
-         .catch(err => res.status(400).json('Error: ' + err));
+
+router.route('/update/:id').post((req, res) => {
+    Order.findById(req.params.id)
+    .then(order => {
+        order.nombre = req.body.nombre;
+        order.email = req.body.email;
+        order.telefono = req.body.telefono;
+        order.direccion = req.body.direccion;
+        order.dni = req.body.dni;
+        
+        order.save()
+        .then(() => res.json('Order updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err));
-    });
-    
-*/
+});
+
 module.exports = router;

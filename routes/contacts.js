@@ -14,6 +14,7 @@ router.route('/add').post((req, res) => {
     const direccion = req.body.direccion;
     const timbre = req.body.timbre;
     const dni = req.body.dni;
+    const id_pedido = req.body.id_pedido;
 
     const newContact = new Contact({
         nombre,
@@ -22,6 +23,7 @@ router.route('/add').post((req, res) => {
         direccion,
         timbre,
         dni,
+        id_pedido,
     });
 
     newContact.save(function(err,obj) {
@@ -56,12 +58,13 @@ router.route('/update/:id').post((req, res) => {
         contact.direccion = req.body.direccion;
         contact.timbre = req.body.timbre;
         contact.dni = req.body.dni;
+        contact.id_pedido = req.body.id_pedido
         
         contact.save()
         .then(() => res.json('Contact updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
-       })
-       .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 /**

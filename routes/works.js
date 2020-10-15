@@ -8,7 +8,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+    const id_pedido = req.body.id_pedido;
     const numeroTrabajo = req.body.numeroTrabajo;
+    const tamanioPapel = req.body.tamanioPapel;
     const linkDrive = req.body.linkDrive;
     const faz = req.body.faz;
     const paginasPDF = req.body.paginasPDF;
@@ -16,10 +18,16 @@ router.route('/add').post((req, res) => {
     const margen = req.body.margen;
     const terminacion = req.body.terminacion;
     const id_worker= req.body.id_worker;
-    const estado= req.body.estado
+    const estado= req.body.estado;
+    const costoImpresion= Number(req.body.costoImpresion);
+    const costoTerminacion= Number(req.body.costoTerminacion);
+    const costoTotal= Number(req.body.costoTotal);   
+    
 
     const newWork = new Work({
+        id_pedido,
         numeroTrabajo,
+        tamanioPapel,
         linkDrive,
         faz,
         paginasPDF,
@@ -28,6 +36,9 @@ router.route('/add').post((req, res) => {
         terminacion,
         id_worker,
         estado,
+        costoImpresion,
+        costoTerminacion,
+        costoTotal,
     });
 
     newWork.save(function(err,obj) {
@@ -60,22 +71,21 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-/** 
- router.route('/update/:id').post((req, res) => {
-     Contact.findById(req.params.id)
-     .then(contact => {
-         contact.nombre = req.body.nombre;
-         contact.email = req.body.email;
-         contact.telefono = req.body.telefono;
-         contact.direccion = req.body.direccion;
-         contact.dni = req.body.dni;
-         
-         contact.save()
-         .then(() => res.json('Contact updated!'))
-         .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-    });
+router.route('/update/:id').post((req, res) => {
     
-*/
+    var id = req.params.id;
+    var update = req.body;
+    console.log(id);
+    console.log(update);
+    
+    Work.findByIdAndUpdate(id, update)
+        .then(() => 
+            res.json('Work update!')
+        )
+        .catch(err => 
+            res.status(400).json('Error: ' + err)
+        );
+
+})
+    
 module.exports = router;

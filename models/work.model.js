@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const workSchema = new Schema({
+    id_pedido: {
+        type: String,
+        required: true
+    },
     numeroTrabajo: {
         type: String,
         required: true
@@ -19,12 +23,10 @@ const workSchema = new Schema({
         trim: true,
         minlength: 3
     },
-
     paginasPDF: {
         type: String,
         required: true,
     },
-
     paginasCarilla: {
         type: String,
         required: true,
@@ -48,6 +50,21 @@ const workSchema = new Schema({
     },
     estado: {
         type: String,
+        required: true,
+        trim: true,
+    },
+    costoImpresion: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    costoTerminacion: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    costoTotal: {
+        type: Number,
         required: true,
         trim: true,
     },
