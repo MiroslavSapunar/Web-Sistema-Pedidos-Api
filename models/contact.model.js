@@ -7,25 +7,21 @@ const contactSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     email: {
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     telefono: {
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     direccion: {
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     timbre: {
         type: String,
@@ -36,13 +32,11 @@ const contactSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     id_pedido: {
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
 });
 

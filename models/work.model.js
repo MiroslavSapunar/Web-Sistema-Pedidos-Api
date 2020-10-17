@@ -7,7 +7,15 @@ const workSchema = new Schema({
         type: String,
         required: true
     },
+    numeroPedido: {
+        type: String,
+        required: true
+    },
     numeroTrabajo: {
+        type: String,
+        required: true
+    },
+    tamanioPapel: {
         type: String,
         required: true
     },
@@ -15,13 +23,11 @@ const workSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     faz: {
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     paginasPDF: {
         type: String,
@@ -35,7 +41,6 @@ const workSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 3
     },
     terminacion: {
         type: String,

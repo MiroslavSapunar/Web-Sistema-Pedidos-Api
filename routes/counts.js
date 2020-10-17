@@ -24,6 +24,7 @@ router.route('/add').post((req, res) => {
 
     newCount.save(function(err,obj) {
         if(err){
+            console.log(err)
             res.json(err)
         }
         res.json(obj.id)

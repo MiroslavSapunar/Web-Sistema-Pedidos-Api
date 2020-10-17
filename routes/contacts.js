@@ -28,6 +28,7 @@ router.route('/add').post((req, res) => {
 
     newContact.save(function(err,obj) {
         if(err){
+            console.log(err)
             res.json(err)
         }
         if(obj){
@@ -50,22 +51,20 @@ router.route('/:id').get((req, res) => {
 })
 
 router.route('/update/:id').post((req, res) => {
-    Contact.findById(req.params.id)
-    .then(contact => {
-        contact.nombre = req.body.nombre;
-        contact.email = req.body.email;
-        contact.telefono = req.body.telefono;
-        contact.direccion = req.body.direccion;
-        contact.timbre = req.body.timbre;
-        contact.dni = req.body.dni;
-        contact.id_pedido = req.body.id_pedido
-        
-        contact.save()
-        .then(() => res.json('Contact updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-    })
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+    
+    var id = req.params.id;
+    var update = req.body;
+    //console.log(id);
+    //console.log(update);
+    
+    Contact.findByIdAndUpdate(id, update)
+        .then(() => 
+            res.json('Contact update!')
+        )
+        .catch(err => 
+            res.status(400).json('Error: ' + err)
+        );
+})
 
 /**
 router.route('/:id').delete((req, res) => {

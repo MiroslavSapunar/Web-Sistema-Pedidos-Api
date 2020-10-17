@@ -9,6 +9,7 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const id_pedido = req.body.id_pedido;
+    const numeroPedido = req.body.numeroPedido;
     const numeroTrabajo = req.body.numeroTrabajo;
     const tamanioPapel = req.body.tamanioPapel;
     const linkDrive = req.body.linkDrive;
@@ -26,6 +27,7 @@ router.route('/add').post((req, res) => {
 
     const newWork = new Work({
         id_pedido,
+        numeroPedido,
         numeroTrabajo,
         tamanioPapel,
         linkDrive,
@@ -43,6 +45,7 @@ router.route('/add').post((req, res) => {
 
     newWork.save(function(err,obj) {
         if(err){
+            console.log(err)
             res.json(err)
         }
         if(obj){
@@ -75,8 +78,8 @@ router.route('/update/:id').post((req, res) => {
     
     var id = req.params.id;
     var update = req.body;
-    console.log(id);
-    console.log(update);
+    //console.log(id);
+    //console.log(update);
     
     Work.findByIdAndUpdate(id, update)
         .then(() => 
