@@ -27,6 +27,9 @@ const worksRouter = require('./routes/works');
 const ordersRouter = require('./routes/orders');
 const countRouter = require('./routes/counts');
 
+app.get("/", (req, res) => {
+    res.send("Api Fotocopiadora CEI");
+})
 
 app.use('/exercises', exercisesRouter);
 app.use('/usuarios', usersRouter);

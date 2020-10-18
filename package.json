@@ -1,10 +1,11 @@
 {
   "name": "web-sistema-pedidos-api",
   "version": "1.0.0",
-  "description": "BackEnd del sitema de monitoreo de pedidos Fotocopiadora CEI",
-  "main": "index.js",
+  "description": "Api del sistema de monitoreo de pedidos Fotocopiadora CEI",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Miroslav Sapunar",
   "license": "MIT",
@@ -13,5 +14,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.8"
+  },
+  "engine": {
+    "node":"14.13.1"
   }
 }
