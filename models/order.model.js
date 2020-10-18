@@ -6,7 +6,7 @@ const orderSchema = new Schema({
     numeroPedido: {
         type: String,
         required: true,
-        //unique: true
+        unique: true
     },
     id_reception: {
         type: String,
@@ -39,9 +39,6 @@ const orderSchema = new Schema({
         type: String,
         required: true,
     },
-
-
-
 });
 
 const Order = mongoose.model('Order', orderSchema);
