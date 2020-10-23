@@ -17,6 +17,7 @@ router.route('/add').post((req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
+    const contact = req.body.contact;
     const usertype = req.body.usertype;
     const recepciones = req.body.recepciones;
     const trabajos = req.body.trabajos;
@@ -25,6 +26,7 @@ router.route('/add').post((req, res) => {
     var newUser = new User({
         username,
         email,
+        contact,
         password,
         usertype,
         recepciones,
@@ -46,7 +48,7 @@ router.route('/add').post((req, res) => {
      */
 
     newUser.save()
-    .then(console.log(res))
+    .then(() => res.json('User added!'))
     .catch(
         err => {
             console.log(err)

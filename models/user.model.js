@@ -23,6 +23,12 @@ const userSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    contact: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    },
     usertype: {
         type: String,
         required: true,
