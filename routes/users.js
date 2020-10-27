@@ -1,3 +1,4 @@
+const getToken = require ('../util');
 const router = require('express').Router();
 let User = require('../models/user.model');
 
@@ -11,6 +12,32 @@ router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
         .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/signin').post((req, res) => {
+    //console.log(req);
+    //console.log(req.body);
+    User.findOne(req.body)
+    .then( user => {
+        if(user){
+            //console.log(user);
+            
+            const signinUser = {
+                _id: user._id,
+                username: user.username,
+                password: user.password,
+                usertype: user.usertype,
+                token: getToken(user)
+            }
+            res.json(signinUser);
+        }else{
+            res.status(401).sendStatus(401);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).sendStatus(400);
+    });
 })
 
 router.route('/add').post((req, res) => {

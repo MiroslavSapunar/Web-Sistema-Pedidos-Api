@@ -27,7 +27,6 @@ const contactsRouter = require('./routes/contacts');
 const worksRouter = require('./routes/works');
 const ordersRouter = require('./routes/orders');
 const countRouter = require('./routes/counts');
-const loginRouter = require('./routes/login');
 
 app.get("/", (req, res) => {
     res.send("Api Fotocopiadora CEI");
@@ -39,8 +38,6 @@ app.use('/contactos', contactsRouter);
 app.use('/trabajos', worksRouter);
 app.use('/pedidos', ordersRouter);
 app.use('/contadores', countRouter);
-app.use('/login', loginRouter);
-
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

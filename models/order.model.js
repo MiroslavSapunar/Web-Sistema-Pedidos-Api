@@ -39,6 +39,14 @@ const orderSchema = new Schema({
         type: String,
         required: true,
     },
+    costoEnvio: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Order = mongoose.model('Order', orderSchema);
