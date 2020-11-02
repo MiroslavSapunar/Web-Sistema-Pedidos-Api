@@ -19,10 +19,10 @@ router.route('/:id').get((req, res) => {
 })
 
 router.route('/login').post((req, res) => {
-    //console.log(req.body);
     User.findOne(req.body)
         .then(user => {
             if (user) {
+                
                 const signinUser = {
                     id: user._id,
                     username: user.username,
@@ -30,13 +30,15 @@ router.route('/login').post((req, res) => {
                     usertype: user.usertype
                 };
 
-                const token = jwt.sign(signinUser, process.env.ACCESS_TOKEN_SECRET);
+                const token = jwt.sign(signinUser, process.env.LOGIN_TOKEN_SECRET);
                 res.json(token);
+
             } else {
                 res.status(401).json({ msg: 'No se encontro el usuario' });
             }
         })
         .catch(err => {
+            console.log(err);
             res.status(400).json({ msg: err.message });
         });
 })
