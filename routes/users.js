@@ -1,6 +1,10 @@
-const getToken = require ('../util');
 const router = require('express').Router();
 let User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
+
+
+const auth = require('../middleware/auth');
+
 
 router.route('/').get((req, res) => {
     User.find()
@@ -11,83 +15,83 @@ router.route('/').get((req, res) => {
 router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
         .then(user => res.json(user))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('No se encontro el usuario'));
 })
 
-router.route('/signin').post((req, res) => {
-    //console.log(req);
+router.route('/login').post((req, res) => {
     //console.log(req.body);
     User.findOne(req.body)
-    .then( user => {
-        if(user){
-            //console.log(user);
-            
-            const signinUser = {
-                _id: user._id,
-                username: user.username,
-                password: user.password,
-                usertype: user.usertype,
-                token: getToken(user)
+        .then(user => {
+            if (user) {
+                const signinUser = {
+                    id: user._id,
+                    username: user.username,
+                    password: user.password,
+                    usertype: user.usertype
+                };
+
+                const token = jwt.sign(signinUser, process.env.ACCESS_TOKEN_SECRET);
+                res.json(token);
+            } else {
+                res.status(401).json({ msg: 'No se encontro el usuario' });
             }
-            res.json(signinUser);
-        }else{
-            res.status(401).sendStatus(401);
-        }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(400).sendStatus(400);
-    });
+        })
+        .catch(err => {
+            res.status(400).json({ msg: err.message });
+        });
 })
 
+router.route("/delete").delete(auth, (req, res) => {
+    User.findByIdAndDelete(res.user)
+        .then(() => res.json('Contact deleted!'))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json({ msg: err.message });
+        });
+});
+
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    const contact = req.body.contact;
-    const usertype = req.body.usertype;
-    const recepciones = req.body.recepciones;
-    const trabajos = req.body.trabajos;
-    const pedidos = req.body.pedidos;
 
-    var newUser = new User({
-        username,
-        email,
-        contact,
-        password,
-        usertype,
-        recepciones,
-        trabajos,
-        pedidos
-    });
+    User.findOne({ username: req.body.username })
+        .then(user => {
+            if (user) {
+                res.status(401).json("Usuario ya registrado");
+            } else {
+                User.findOne({ email: req.body.email })
+                    .then(user => {
+                        if (user) {
+                            res.status(403).json("Email ya registrado");
+                        } else {
 
-    /**
-     *
-    newUser.save(function(err,obj) {
-        if(err){
-            console.log(err)
-            res.json(err)
-        }
-        if(obj){
-            res.json(obj.id)
-        }
-     });
-     */
+                            const newUser = new User({
+                                username: req.body.username,
+                                email: req.body.email,
+                                password: req.body.password,
+                                contact: req.body.contact,
+                                usertype: req.body.usertype,
+                                recepciones: req.body.recepciones,
+                                trabajos: req.body.trabajos,
+                                pedidos: req.body.pedidos,
+                            });
 
-    newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(
-        err => {
-            console.log(err)
-            res.status(400).json(err)
-        }
-    );
-    
-    /**
-     * 
-     .then(() => res.json('¡Usuario agregado!'))
-     .catch( err => res.status(400).json('Error: ' + err));
-   */
+                            newUser.save()
+                                .then(() => res.json('User added!'))
+                                .catch(err => {
+                                    console.log(err)
+                                    res.status(400).json({ msg: err.message });
+                                });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(400).json({ msg: err.message });
+                    })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).json({ msg: err.message });
+        })
 });
 
 module.exports = router;
