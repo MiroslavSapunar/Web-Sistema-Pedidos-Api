@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    username: {
+const clientSchema = new Schema({
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -14,20 +14,16 @@ const userSchema = new Schema({
         required: true,
         trim: true,
     },
-    usertype: {
+    contacto: {
         type: String,
         required: true,
     },
-    recepciones: {
-        type: Array,
-        required: true,
-    },
-    impresiones: {
+    pedidos: {
         type: Array,
         required: true,
     }
 });
 
-const User = mongoose.model('User', userSchema);
+const Client = mongoose.model('Client', clientSchema);
 
-module.exports = User;
+module.exports = Client;

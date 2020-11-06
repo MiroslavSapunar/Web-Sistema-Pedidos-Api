@@ -27,7 +27,9 @@ router.route('/login').post((req, res) => {
                     id: user._id,
                     username: user.username,
                     password: user.password,
-                    usertype: user.usertype
+                    usertype: user.usertype,
+                    recepciones: user.recepciones,
+                    impresiones: user.impresiones,
                 };
 
                 const token = jwt.sign(signinUser, process.env.LOGIN_TOKEN_SECRET);
@@ -59,36 +61,22 @@ router.route('/add').post((req, res) => {
             if (user) {
                 res.status(401).json("Usuario ya registrado");
             } else {
-                User.findOne({ email: req.body.email })
-                    .then(user => {
-                        if (user) {
-                            res.status(403).json("Email ya registrado");
-                        } else {
+                
+                const newUser = new User({
+                    username: req.body.username,
+                    password: req.body.password,
+                    usertype: req.body.usertype,
+                    recepciones: req.body.recepciones,
+                    impresiones: req.body.trabajos,
+                });
 
-                            const newUser = new User({
-                                username: req.body.username,
-                                email: req.body.email,
-                                password: req.body.password,
-                                contact: req.body.contact,
-                                usertype: req.body.usertype,
-                                recepciones: req.body.recepciones,
-                                trabajos: req.body.trabajos,
-                                pedidos: req.body.pedidos,
-                            });
-
-                            newUser.save()
-                                .then(() => res.json('User added!'))
-                                .catch(err => {
-                                    console.log(err)
-                                    res.status(400).json({ msg: err.message });
-                                });
-                        }
-                    })
+                newUser.save()
+                    .then(() => res.json('User added!'))
                     .catch(err => {
-                        console.log(err);
+                        console.log(err)
                         res.status(400).json({ msg: err.message });
-                    })
-            }
+                    });
+                }
         })
         .catch(err => {
             console.log(err);

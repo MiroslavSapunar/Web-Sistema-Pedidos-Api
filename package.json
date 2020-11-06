@@ -1,7 +1,7 @@
 {
-  "name": "api-sistema-pedidos-cei",
+  "name": "api-sistema-fotocopiadora-cei",
   "version": "1.0.0",
-  "description": "Api del sistema de monitoreo de pedidos Fotocopiadora CEI",
+  "description": "Api del sistema de gestion Fotocopiadora CEI",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,15 +11,13 @@
   "author": "Miroslav Sapunar",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.8"
+    "mongoose": "^5.10.12"
   },
   "engines": {
-    "node": "14"
+    "node": "14.15"
   }
 }
